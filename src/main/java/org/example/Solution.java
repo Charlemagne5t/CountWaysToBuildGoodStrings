@@ -10,8 +10,8 @@ package org.example;
 //A good string is a string constructed by the above process having a length between low and high (inclusive).
 public class Solution {
     public int countGoodStrings(int low, int high, int zero, int one) {
-        int mod = (int) 1e9 + 7;
-        long[] dp = new long[high + 1];
+        int mod = 1000_000_007;
+        int[] dp = new int[high + 1];
         dp[0] = 0;
         if (zero == 1) {
             dp[1] = 1;
@@ -32,12 +32,12 @@ public class Solution {
             if (i - zero > 0)
                 dp[i] = (dp[i] + dp[i - zero]) % mod;
             if (i - one > 0)
-                dp[i] = (dp[i] + dp[i - one] % mod);
+                dp[i] = (dp[i] + dp[i - one]) % mod;
         }
-        long sum = 0;
+        int sum = 0;
         for (int i = low; i <= high; i++) {
-            sum += dp[i];
+            sum = (sum + dp[i]) % mod;
         }
-        return (int) (sum % mod);
+        return sum % mod;
     }
 }
